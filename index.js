@@ -9,7 +9,7 @@ const app = express()
 
 app.use(express.json());
 
-const token = '8119835279:AAEqielr4FGSkDPmHNcG_Iq5SAMANP5pP_Y';
+const token = process.env.bot_token;
 
 
 const bot = new TelegramBot(token, { polling: true });
@@ -33,10 +33,9 @@ bot.on('message', async (msg) => {
     if (msg) {
         const messageId = msg.message_id;
         const input = msg.text
-        // const text = "shut your mouth"
         const chatId = msg.chat.id;
-        const ownerId = 1852300364
-        const owner = "tushar8282282822828"
+        const ownerId = process.env.owner_ID;
+        const owner = process.env.ownerUserName;
         const text = `owner ${owner},  ${msg.from.username}  is making trouble in this group`
         if (checker.check(input)) {
 
