@@ -12,7 +12,7 @@ app.use(express.json());
 const token = process.env.bot_token;
 
 
-const bot = new TelegramBot(token);
+const bot = new TelegramBot(token, { polling: false});
 
 const URL = process.env.RENDER_EXTERNAL_URL; // Your Render HTTPS URL
 
@@ -24,7 +24,8 @@ app.post(`/bot${token}`, (req, res) => {
   res.sendStatus(200);
 });
 
-console.log('Bot is running...');
+console.log('working ----------------------------------------------------');
+
 
 bot.on('message', async (msg) => {
 
@@ -57,9 +58,11 @@ bot.on('message', async (msg) => {
     };
 
 });
+
 bot.on('polling_error', (error) => {
     console.error(`[POLLING ERROR] Code: ${error.code}, Message: ${error.message}`);
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
