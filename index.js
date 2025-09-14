@@ -57,6 +57,9 @@ bot.on('message', async (msg) => {
     };
 
 });
+bot.on('polling_error', (error) => {
+    console.error(`[POLLING ERROR] Code: ${error.code}, Message: ${error.message}`);
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
