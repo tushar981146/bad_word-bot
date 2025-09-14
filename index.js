@@ -12,7 +12,7 @@ app.use(express.json());
 const token = process.env.bot_token;
 
 
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token);
 
 const URL = process.env.RENDER_EXTERNAL_URL; // Your Render HTTPS URL
 
@@ -27,8 +27,6 @@ app.post(`/bot${token}`, (req, res) => {
 console.log('Bot is running...');
 
 bot.on('message', async (msg) => {
-    console.log(msg);
-
 
     if (msg) {
         const messageId = msg.message_id;
@@ -41,15 +39,17 @@ bot.on('message', async (msg) => {
 
             if(owner === msg.from.username) {
                 await bot.sendMessage(
-                ownerId, `${ownerId} please be calm`, {
+                ownerId, `${owner} please be calm`, {
                 reply_to_message_id: msg.message_id
                 });
             }
 
-            await bot.sendMessage(
+            else {
+                await bot.sendMessage(
                 chatId, `${text}`, {
                 reply_to_message_id: msg.message_id
             });
+            }
 
             await bot.deleteMessage(chatId, messageId);
             console.log(`Deleted message: ${msg.text}`);
