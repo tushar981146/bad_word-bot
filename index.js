@@ -30,12 +30,15 @@ console.log('working ----------------------------------------------------');
 bot.on('message', async (msg) => {
 
     if (msg) {
+
+        console.log(msg);
+        
         const messageId = msg.message_id;
         const input = msg.text
         const chatId = msg.chat.id;
         const ownerId = process.env.owner_ID;
         const owner = process.env.ownerUserName;
-        const text = `owner ${owner},  ${msg.from.username}  is making trouble in this group`
+        const text = `owner @${owner},  @${msg.from.username}  is making trouble in this group`
         if (checker.check(input)) {
 
             if(owner === msg.from.username) {
