@@ -36,8 +36,10 @@ bot.on('message', async (msg) => {
         const messageId = msg.message_id;
         const input = msg.text
         const chatId = msg.chat.id;
-        const ownerId = process.env.owner_ID;
-        const owner = process.env.ownerUserName;
+        const admins =  await bot.getChatAdministrators(chatId);
+        const creator = admins.find(a => a.status === "creator");
+        const owner = creator.user.username || creator.user.first_name;
+        const ownerId = creator.user.id;
         const text = `owner @${owner},  @${msg.from.username}  is making trouble in this group`
         if (checker.check(input)) {
 
