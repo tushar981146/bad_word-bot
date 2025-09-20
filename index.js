@@ -43,7 +43,7 @@ bot.on('message', async (msg) => {
         const text = `owner @${owner},  @${msg.from.username}  is making trouble in this group`
         if (checker.check(input)) {
 
-            if(owner === msg.from.username) {
+            if(creator.user.username === msg.from.username) {
                 await bot.sendMessage(
                 ownerId, `${owner} please be calm`, {
                 reply_to_message_id: msg.message_id
