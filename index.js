@@ -31,8 +31,6 @@ bot.on('message', async (msg) => {
 
     if (msg) {
 
-        console.log(msg);
-        
         const messageId = msg.message_id;
         const input = msg.text
         const chatId = msg.chat.id;
@@ -45,7 +43,7 @@ bot.on('message', async (msg) => {
 
             if(creator.user.username === msg.from.username) {
                 await bot.sendMessage(
-                ownerId, `${owner} please be calm`, {
+                chatId, `@${owner} please be calm`, {
                 reply_to_message_id: msg.message_id
                 });
             }
